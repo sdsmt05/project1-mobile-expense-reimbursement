@@ -2,15 +2,20 @@ import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import LoginPage from './components/login-view';
+import ReimbursementView from './components/reimbursement-view';
 
 export default function App() {
 
-  const [user, setUser] = useState({name: "", isManager: false});
-  console.log(user);
+  const [user, setUser] = useState({name: "", id: "", isManager: false});
+
   return (
     <View style={styles.container}>
-      {!user.isManager ? <LoginPage setUser={setUser}/> : 
-      <Text style={styles.text}>Welcome, {user.name}</Text>}
+      {!user.isManager ? <LoginPage setUser={setUser}/> :
+      <View style={styles.container}>
+        <Text style={styles.header}>Welcome, {user.name}</Text>
+        <ReimbursementView id={user.id}/>
+      </View>
+      }
       <StatusBar style="auto" />
     </View>
   );
@@ -23,8 +28,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  text: {
-    color: 'white',
-    fontSize: 20
+  header: {
+    color: '#4e55a7',
+    fontSize: 20,
+    marginBottom: 40
   }
 });

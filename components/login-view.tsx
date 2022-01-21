@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Button, Text, TextInput, View, StyleSheet, TouchableOpacity, TouchableHighlight } from "react-native";
+import { Button, Text, TextInput, View, StyleSheet } from "react-native";
 
 export default function LoginPage(props: {setUser: Function}){
 
@@ -34,11 +34,9 @@ export default function LoginPage(props: {setUser: Function}){
                     alert(`Only managers are allowed to use this app.`);
                     
                 } else {
-                    props.setUser({name: `${user.fname} ${user.lname}`, isManager: user.isManager});
+                    props.setUser({name: `${user.fname} ${user.lname}`, id: user.id, isManager: user.isManager});
                 }
             }
-            usernameInput.current.clear();
-            passwordInput.current.clear();
         } 
     }
 
