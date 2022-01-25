@@ -10,7 +10,7 @@ export default function ReimbursementView(props: {id: string}){
     
     useEffect(()=>{
         (async ()=>{
-            const response = await fetch(`http://localhost:5000/reimbursements`);
+            const response = await fetch(`https://proj1backend.azurewebsites.net/reimbursements`);
             const reimbursements: Reimbursement[] = await response.json();
             const allOpenReimbursements = reimbursements.filter(r => r.isApproved === "Pending");
             setReimbursements(allOpenReimbursements.filter(r => r.ownerId !== props.id));

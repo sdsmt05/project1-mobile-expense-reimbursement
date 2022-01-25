@@ -18,12 +18,12 @@ export default function LoginPage(props: {setUser: Function}){
         if(!username || !password){
             alert("Either the Username or Password is missing.");
         } else {
-            const response = await fetch('http://localhost:5000/login', {
+            const response = await fetch('https://proj1backend.azurewebsites.net/login', {
                 method: 'PATCH',
                 body: JSON.stringify(loginInfo),
                 headers: {'content-type': 'application/json'}
             })
-
+ 
             if(response.status === 404) {
                 alert(`User with username ${loginInfo.username} could not be found.`);
             } else if (response.status === 401) {
