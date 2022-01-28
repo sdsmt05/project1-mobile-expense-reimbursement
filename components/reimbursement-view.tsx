@@ -35,9 +35,10 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 20,
         marginBottom: 40,
+        alignSelf: 'center'
     },
     container: {
-        alignItems: 'center',
-        justifyContent: 'center'
+        minWidth: '100%',
+        alignContent: 'center'
     }
 })

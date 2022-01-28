@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, TouchableOpacity, View, Text, Button, TextInput } from "react-native";
+import { StyleSheet, TouchableOpacity, View, Text, Button, TextInput, Linking } from "react-native";
 import Reimbursement, { IsApproved } from "../dtos/dtos";
 import ReimbursementView from "./reimbursement-view";
 
@@ -38,16 +38,18 @@ export default function ReimbursementItem(props: {reimbursement: Reimbursement, 
             <View style={styles.textContainer}>
                 <Text style={styles.text}>{reimbursement.ownerName}</Text>
                 <Text style={styles.text}>${reimbursement.amount}</Text>
+                {reimbursement.imageUrl ? <Button title="Download Receipt" onPress={() => {Linking.openURL(`${reimbursement.imageUrl}`)}}/> : <Text></Text>}
             </View>
         </View>
         {expanded &&
             <View>
                 <Text style={styles.detailsContainer}>{reimbursement.reason}</Text>
+                
                 <TouchableOpacity>
                     <TextInput style={styles.input} placeholder="Comment (optional)" onChangeText={t => setMgrComment(t)}/>
                 </TouchableOpacity>
                 
-                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'stretch'}}>
+                <View style={{flexDirection: 'row'}}>
                     <View style={styles.buttons}>
                         <Button color={'green'} title="Approve" onPress={() => handlePress(IsApproved.yes)}/>
                     </View>
@@ -71,7 +73,8 @@ const styles = StyleSheet.create({
         borderRadius: 5
     },
     container: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignSelf: 'stretch'
     },
     textContainer: {
         justifyContent: 'space-around',
@@ -85,10 +88,15 @@ const styles = StyleSheet.create({
     },
     text: {
         color: 'white',
-        fontSize: 20
+        fontSize: 20,
+        marginBottom: 10
     },
     buttons: {
-        minWidth: '50%'
+        flex: 1,
+        marginTop: 10,
+        marginBottom: 10,
+        marginLeft: 10,
+        marginRight: 10
     },
     input: {
         backgroundColor: 'white',
